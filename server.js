@@ -1,8 +1,16 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const app = express();
 const port = 3000; // 또는 원하는 포트 번호
+
+mongoose
+  .connect(
+    "mongodb+srv://wholesome-gee:wlfyd1564@freecluster.0ds7963.mongodb.net/?retryWrites=true&w=majority&appName=FreeCluster"
+  )
+  .then(() => console.log("✅ db 연결"))
+  .catch((err) => console.log("❌ db 연결 실패 : ", err));
 
 // 프로젝트내 build폴더를 static폴더로 사용한다는 설정
 app.use(express.static(path.join(__dirname, "client", "build")));
@@ -32,5 +40,5 @@ app.get('*', (req, res) => {
 */
 
 app.listen(port, () => {
-  console.log(`✅Server on : http://localhost:${port}`);
+  console.log(`✅ Server on : http://localhost:${port}`);
 });
